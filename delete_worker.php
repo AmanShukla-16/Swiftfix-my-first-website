@@ -6,7 +6,7 @@ header("Location: sub_admin_login.html");
 exit;
 }
 
-$conn = new mysqli("localhost","root","","service");
+$conn = new mysqli("localhost", "your_username", "your_password", "service");
 
 $id = $_GET['id'];
 
