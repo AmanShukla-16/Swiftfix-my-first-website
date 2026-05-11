@@ -129,7 +129,7 @@ color:#94a3b8;
 <header>
 <h1>SwiftFix Electrical Services</h1>
 <nav>
-<a href="main.html">Home</a>
+<a href="index.html">Home</a>
 <a href="#">Services</a>
 <a href="#">Contact</a>
 </nav>
