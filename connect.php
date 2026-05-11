@@ -1,8 +1,9 @@
 <?php
-// Database connection only
-$con = mysqli_connect("localhost", "root", "", "service");
+// Database Connection
+
+$con = mysqli_connect("localhost", "your_username", "your_password", "service");
 
 if (!$con) {
-    die("Database connection failed: " . mysqli_connect_error());
+    die("Connection Failed");
 }
 ?>
