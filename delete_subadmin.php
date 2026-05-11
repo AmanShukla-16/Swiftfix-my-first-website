@@ -1,6 +1,6 @@
 <?php
 
-$conn = mysqli_connect("localhost","root","","service");
+$con = mysqli_connect("localhost", "your_username", "your_password", "service");
 
 $id = $_GET['id'];
 
