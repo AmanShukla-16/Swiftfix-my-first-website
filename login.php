@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Database connection
-$con = new mysqli('localhost', 'root', '', 'service');
+$con = new mysqli("localhost", "your_username", "your_password", "service");
 if ($con->connect_error) die("Connection failed: " . $con->connect_error);
 
 // Get input
