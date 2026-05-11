@@ -1,6 +1,6 @@
 <?php
 
-$conn = mysqli_connect("localhost","root","","service");
+$conn = mysqli_connect("localhost", "your_username", "your_password", "service");
 
 $name = $_POST['name'];
 $email = $_POST['email'];
