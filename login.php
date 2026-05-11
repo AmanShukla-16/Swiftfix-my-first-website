@@ -44,7 +44,7 @@ $stmt->fetch();
 if ($password === $db_password) {
     $_SESSION['user_logged_in'] = true;
     $_SESSION['username'] = $username;
-    header("Location: main.html");
+    header("Location: index.html");
     exit();
 } else {
     echo "<script>alert('Incorrect password'); window.history.back();</script>";
