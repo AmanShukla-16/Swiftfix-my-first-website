@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwiftFix Service</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+.search-suggestions {
+  position: absolute;
+  top: 50px;
+  background: rgba(0,0,0,0.9);
+  width: 220px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.search-suggestions div {
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-suggestions div:hover {
+  background: #4CAF50;
+}
+
+body{
+  scroll-behavior:smooth;
+  background:url('../images/mainbackground.png') center/cover fixed no-repeat;
+  position:relative;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* Dark overlay */
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+  z-index:-1;
+}
+
+.hero{
+  position: relative;
+  background: url('../images/mainbackground.png') center/cover no-repeat;
+  text-align: center;
+  padding: 120px 20px;
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+/* Dark overlay for readability */
+.hero::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.65);
+}
+
+/* keep text above overlay */
+.hero h1,
+.hero p,
+.hero .cta-btn{
+  position:relative;
+  z-index:2;
+}
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #4CAF50, #00e0ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero p {
+  opacity: 0.8;
+  margin-bottom: 25px;
+}
+
+.cta-btn {
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(90deg, #4CAF50, #00e0ff);
+  color: white;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.cta-btn:hover {
+  transform: scale(1.1);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* HEADER */
+.header {
+  text-shadow: 0 0 15px rgba(0,255,200,0.6);
+  padding: 30px;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: transparent;
+}
+
+/* NAVBAR */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  position: sticky;
+  top: 0;
+}
+
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.menu-icon:hover {
+  transform: rotate(90deg);
+}
+
+.dropdown {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 70px;
+  left: 40px;
+  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.dropdown a {
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.dropdown a:hover {
+  background: #4CAF50;
+  border-radius: 6px;
+}
+.search-suggestions {
+  z-index: 999;
+}
+/* SEARCH */
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.2);
+  width: 220px;
+  outline: none;
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.search-button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: none;
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-button:hover {
+  transform: scale(1.05);
+}
+
+/* SECTION */
+.section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+}
+
+/* SERVICES GRID */
+.service-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+}
+
+.service-card {
+ box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  height: 180px;
+  border-radius: 20px;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: 0.4s;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+}
+
+.service-card a {
+  position: relative;
+  color: white;
+  text-decoration: none;
+}
+
+.service-card:hover {
+  box-shadow: 0 15px 40px rgba(76,175,80,0.5);
+  transform: translateY(-10px) scale(1.03);
+}
+
+/* FOOTER */
+.footer {
+  background: rgba(0,0,0,0.6);
+  text-align: center;
+  padding: 20px;
+  margin-top: 60px;
+}
+
+.footer a {
+  color: #4CAF50;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+.plumber-bg {
+  background-image: url('../images/Plumber.jpg');
+}
+
+.electric-bg {
+  background-image: url('../images/Electrician.jpg');
+}
+
+.cleaner-bg {
+  background-image: url('../images/Cleaner.jpg');
+}
+
+.accounting-bg {
+  background-image: url('../images/accounting.jpg');
+}
+
+.legal-bg {
+  background-image: url('../images/legal.jpg');
+}
+
+.coaching-bg {
+  background-image: url('../images/coaching.jpg');
+}
+
+.photo-bg {
+  background-image: url('../images/photo.jpg');
+}
+
+.catering-bg {
+  background-image: url('../images/catering.jpg');
+}
+.auth-buttons{
+display:flex;
+gap:10px;
+}
+
+.login-btn{
+padding:8px 18px;
+border-radius:20px;
+border:1px solid #4CAF50;
+background:transparent;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.login-btn:hover{
+background:#4CAF50;
+transform: scale(1.05);
+}
+
+.signup-btn{
+padding:8px 18px;
+border-radius:20px;
+border:1px solid #4CAF50;
+background:transparent;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.signup-btn:hover{
+transform:scale(1.05);
+background:#4CAF50;
+}
+</style>
+</head>
+<body>
+  <div class="hero">
+  <h1>Fix Anything. Anytime.</h1>
+  <p>Your trusted platform for professional home services.</p>
+  <a href="#services"><button class="cta-btn">Explore Services</button></a>
+</div>
+
+<div class="header">SwiftFix Service</div>
+
+<div class="nav">
+
+  <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+
+  <div class="dropdown" id="dropdownMenu">
+<a href="help.html">Help</a>
+<a href="contect.html">Contact</a>
+<a href="info.html">Info</a>
+
+<a href="profile.php" id="profileLink" style="display:none;">Profile</a>
+
+<a href="#" id="logoutLink" style="display:none;" onclick="confirmLogout(event)">Logout</a>
+</div>
+
+  <div class="search-container">
+    <input type="text" class="search-bar" placeholder="Search services..." onkeyup="showSuggestions()">
+    <div class="search-suggestions" id="suggestions"></div>
+    <button class="search-button" onclick="searchService()">Search</button>
+  </div>
+
+  <!-- Login Signup Buttons -->
+ <div class="auth-buttons" id="authButtons">
+<a href="login.html"><button class="login-btn">Login</button></a>
+<a href="form.html"><button class="signup-btn">Sign Up</button></a>
+</div>
+
+</div>
+
+<div class="section" id="services">
+
+<h2>Our Services</h2>
+
+<!-- HOME SERVICES -->
+<h3 class="service-title">Home Services</h3>
+<div class="service-list">
+
+<div class="service-card plumber-bg">
+<a href="plumber.php">Plumbing</a>
+</div>
+
+<div class="service-card electric-bg">
+<a href="electrical.php">Electrical Repairs</a>
+</div>
+
+<div class="service-card cleaner-bg">
+<a href="cleaner.php">Cleaner</a>
+</div>
+
+</div>
+
+<center><h1> comingsoon </h1></center>
+
+<!-- BUSINESS SERVICES -->
+<h3 class="service-title">Business Services</h3>
+<div class="service-list">
+
+<div class="service-card accounting-bg">
+<a href="comingsoon.html">Accounting</a>
+</div>
+
+<div class="service-card legal-bg">
+<a href="comingsoon.html">Legal Consultation</a>
+</div>
+
+<div class="service-card coaching-bg">
+<a href="comingsoon.html">Business Coaching</a>
+</div>
+
+</div>
+
+
+<!-- EVENT SERVICES -->
+<h3 class="service-title">Event Services</h3>
+<div class="service-list">
+
+<div class="service-card photo-bg">
+<a href="comingsoon.html">Photography</a>
+</div>
+
+<div class="service-card catering-bg">
+<a href="comingsoon.html">Catering</a>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+  &copy; 2025 SwiftFix Service | 
+  <a href="help.html">Help</a> | 
+  <a href="contect.html">Contact</a> | 
+  <a href="info.html">Info</a>
+</div>
+
+<script>
+const suggestionsData = [
+  { name: 'Plumbing', link: 'plumber.php' },
+  { name: 'Electrical Repairs', link: 'electrical.php' },
+  { name: 'Cleaner', link: 'cleaner.php' },
+  { name: 'Accounting', link: 'comingsoon.html' },
+  { name: 'Legal Consultation', link: 'comingsoon.html' },
+  { name: 'Business Coaching', link: 'comingsoon.html' },
+  { name: 'Photography', link: 'comingsoon.html' },
+  { name: 'Catering', link: 'comingsoon.html' },
+  { name: 'Help', link: 'page2.html' },
+  { name: 'Contact', link: 'page3.html' },
+  { name: 'Info', link: 'page4.html' }
+];
+
+function showSuggestions() {
+  const input = document.querySelector('.search-bar').value.toLowerCase();
+  const suggestionBox = document.getElementById('suggestions');
+  suggestionBox.innerHTML = '';
+
+  if (!input) return;
+
+  const filtered = suggestionsData.filter(item =>
+    item.name.toLowerCase().includes(input)
+  );
+
+  filtered.forEach(item => {
+    const div = document.createElement('div');
+    div.textContent = item.name;
+    div.onclick = () => window.location.href = item.link;
+    suggestionBox.appendChild(div);
+  });
+}
+
+function searchService() {
+  const query = document.querySelector('.search-bar').value.toLowerCase();
+  const match = suggestionsData.find(item => item.name.toLowerCase() === query);
+
+  if (match) {
+    window.location.href = match.link;
+  } else {
+    alert('No matching service found.');
+  }
+}
+
+function toggleMenu() {
+  const dropdown = document.getElementById('dropdownMenu');
+  dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+}
+
+function confirmLogout(e){
+e.preventDefault();
+
+if(confirm("Are you sure you want to logout?")){
+
+localStorage.removeItem("userLoggedIn");
+window.location.href="main.html";
+
+}
+}
+// Check login status
+let userLoggedIn = localStorage.getItem("userLoggedIn");
+
+if(userLoggedIn === "true"){
+
+document.getElementById("authButtons").style.display="none";
+document.getElementById("profileLink").style.display="block";
+document.getElementById("logoutLink").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coming Soon</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff; }
+      to { text-shadow: 0 0 25px #ff69b4, 0 0 35px #00ffff; }
+    }
+    .notify input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+    }
+    .notify button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #ff69b4;
+      color: white;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: 0.3s;
+    }
+    .notify button:hover {
+      background: #ff1493;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 Coming Soon</h1>
+  
+  <form class="notify" onsubmit="event.preventDefault(); alert('Thanks! We will notify you.');" action="http://localhost/local_side/Dummy%20file/main.html">
+    <input type="email" placeholder="Enter your email" required>
+    <button type="submit">Notify Me</button>
+  </form>
+</body>
+</html>

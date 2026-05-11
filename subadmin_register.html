@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwiftFix Staff Registration</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0f172a,#1e293b,#020617);
+color:white;
+}
+
+/* glass container */
+
+.container{
+width:380px;
+padding:40px;
+border-radius:20px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.2);
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+.container h2{
+text-align:center;
+margin-bottom:25px;
+color:#00e0ff;
+}
+
+/* inputs */
+
+.container input{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:none;
+border-radius:8px;
+background:#0f172a;
+color:white;
+font-size:14px;
+}
+
+.container input::placeholder{
+color:#aaa;
+}
+
+/* button */
+
+.container button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#00e0ff,#00c6ff);
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.container button:hover{
+transform:scale(1.03);
+box-shadow:0 5px 15px rgba(0,224,255,0.4);
+}
+
+/* login link */
+
+.login-link{
+text-align:center;
+margin-top:18px;
+font-size:14px;
+}
+
+.login-link a{
+color:#00e0ff;
+text-decoration:none;
+font-weight:bold;
+transition:0.3s;
+}
+
+.login-link a:hover{
+color:#4CAF50;
+text-decoration:underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Staff Access Request</h2>
+
+<form action="subadmin_register.php" method="POST">
+
+<input type="text" name="name" placeholder="Name" required>
+
+<input type="email" name="email" placeholder="Email" required>
+
+<input type="password" name="password" placeholder="Password" required>
+
+<button type="submit">Request Access</button>
+
+</form>
+
+<div class="login-link">
+Already approved? <a href="sub_admin_login.html">Staff Login</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+CREATE TABLE workers (
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100),
+service VARCHAR(50),
+contact VARCHAR(50),
+image VARCHAR(255)
+);

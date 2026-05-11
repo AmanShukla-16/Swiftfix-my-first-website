@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registration</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #141e30, #243b55);
+  overflow: hidden;
+}
+
+/* Floating background glow */
+body::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(76,175,80,0.4), transparent 70%);
+  top: -100px;
+  left: -100px;
+  filter: blur(100px);
+}
+
+/* Glass Card */
+.form-container {
+  position: relative;
+  width: 420px;
+  padding: 45px 35px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  color: white;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-size: 28px;
+  background: linear-gradient(90deg, #4CAF50, #00e0ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+  opacity: 0.8;
+}
+
+input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 10px rgba(76,175,80,0.5);
+}
+
+/* Premium Button */
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #4CAF50, #00e0ff);
+  color: white;
+  transition: 0.4s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(76,175,80,0.6);
+}
+
+/* Links */
+.links {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+.links a {
+  color: #00e0ff;
+  text-decoration: none;
+  display: block;
+  margin-top: 8px;
+  transition: 0.3s;
+}
+
+.links a:hover {
+  color: #4CAF50;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+  </style>
+</head>
+
+<body>
+
+  <div class="form-container">
+    <h1>User Registration</h1>
+
+    <form action="register.php" method="post" id="registerForm">
+
+      <label>Username</label>
+      <input type="text" name="username" required>
+
+      <label>Email</label>
+      <input type="email" name="email" required>
+
+      <label>Password</label>
+      <input type="password" id="password" name="password" required>
+
+      <label>Confirm Password</label>
+      <input type="password" id="confirm_password" name="confirm_password" required>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="links">
+      <a href="login.html">User Login</a>
+      <a href="admin_login.php">Admin Login</a>
+      <a href="subadmin_register.html">Register as Staff</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function (e) {
+      const pass = document.getElementById('password').value;
+      const confirm = document.getElementById('confirm_password').value;
+
+      if (pass !== confirm) {
+        alert('Passwords do not match!');
+        e.preventDefault();
+      }
+    });
+  </script>
+
+</body>
+</html>
