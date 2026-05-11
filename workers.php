@@ -1,6 +1,6 @@
 <?php
 
-$conn = new mysqli("localhost","root","","service");
+$conn = new mysqli("localhost", "your_username", "your_password", "service");
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
