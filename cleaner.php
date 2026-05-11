@@ -129,7 +129,7 @@ color:#94a3b8;
 <header>
 <h1>SwiftFix Cleaning Services</h1>
 <nav>
-<a href="main.html">Home</a>
+<a href="index.html">Home</a>
 <a href="#">Services</a>
 <a href="contact.html">Contact</a>
 </nav>
